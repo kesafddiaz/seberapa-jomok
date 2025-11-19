@@ -6,13 +6,16 @@ import { useState } from 'react';
 import bersiaplah from './assets/bersiaplah.jpg';
 import rusdi from './assets/rusdi.jpg';
 import imut from './assets/imut.jpg';
-import amba from './assets/amba.jpg';
+import yesking from './assets/yesking.png';
 
 function App() {
   const [inputValue, setInputValue] = useState('');
   const [submittedName, setSubmittedName] = useState<string | null>(null);
   const [percent, setPercent] = useState(0);
   const [imgPath, setImgPath] = useState('');
+  const jomokers = [
+    "humam", "jeisa", "rafa", "danu", "farhan"
+  ]
 
   const checkJomok = (event: FormEvent) => {
     event.preventDefault();
@@ -22,13 +25,15 @@ function App() {
     let calculatedPercent = 0;
 
     // Set submittedName (hanya untuk keperluan rendering)
-    setSubmittedName(inputValue); 
+    setSubmittedName(inputValue);
+    
+
     
     // Logika perhitungan persentase
     if (currentName) {
-        if (currentName === 'humam' || currentName === 'muhammad humam'){
-            calculatedPercent = 1000;
-        } else {
+      if (jomokers.some(jomoker => currentName.includes(jomoker))){
+        calculatedPercent = 1000;
+    } else {
             calculatedPercent = Math.floor(Math.random() * 101);
         }
     }
@@ -45,7 +50,7 @@ function App() {
       setImgPath(imut);
     } 
     else {
-      setImgPath(amba);
+      setImgPath(yesking);
     }
     
     // **3. Update state 'percent' untuk keperluan TAMPILAN**
